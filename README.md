@@ -4,6 +4,9 @@ Modify exdieslib to support the new encryption
 # Add
 恋音セ・ピアーチェ PKG  
 不運と幸運と恋占いのタロット PKG  
+その花が咲いたら、また僕は君に出逢う PKG  
+忘却執事と恋するお嬢様の回想録 PKG  
+初恋＊シンドローム DL  
 
 # Find Key Table
 if you can read chinese here are some essays I wrote to show you how to find the key  
