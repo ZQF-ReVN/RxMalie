@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="exdieslib">
+      <UniqueIdentifier>{9d47a678-b420-4a0f-9bf8-545aed1759c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IDA Macro">
+      <UniqueIdentifier>{39de0d2d-00ac-4250-8050-36e3a5182934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camellia">
+      <UniqueIdentifier>{cf83688c-9509-45be-a838-1689992d3393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecBlock_DIRA">
+      <UniqueIdentifier>{facc42c2-fd00-4e6c-b364-9b03967ad87c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DecBlock_DIRA.h">
+      <Filter>DecBlock_DIRA</Filter>
+    </ClInclude>
+    <ClInclude Include="as-util.h">
+      <Filter>exdieslib</Filter>
+    </ClInclude>
+    <ClInclude Include="defs.h">
+      <Filter>IDA Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="exdieslib_key.h">
+      <Filter>exdieslib</Filter>
+    </ClInclude>
+    <ClInclude Include="camellia_decrypt128.h">
+      <Filter>camellia</Filter>
+    </ClInclude>
+    <ClInclude Include="exdieslib_struct.h">
+      <Filter>exdieslib</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyTable.h">
+      <Filter>DecBlock_DIRA</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DecBlock_DIRA.cpp">
+      <Filter>DecBlock_DIRA</Filter>
+    </ClCompile>
+    <ClCompile Include="exdieslib.cpp">
+      <Filter>exdieslib</Filter>
+    </ClCompile>
+    <ClCompile Include="camellia_decrypt128.cpp">
+      <Filter>camellia</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
