@@ -1,5 +1,5 @@
 # MalieTools
-Modify exdieslib to support the new version
+Modify exdieslib to support the new encryption
 
 # Add
 恋音セ・ピアーチェ PKG  
