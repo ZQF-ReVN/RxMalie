@@ -24,5 +24,3 @@ public:
 private:
 	void Extract(const std::string& strPreFix, size_t posEntry1Offset, size_t nEntryCount);
 };
-
-void LIBU_Extract(FILE* fpPack, size_t nKeyIndex, const std::string& strPrefix, size_t posOffset, size_t szDec, bool bFlatten);
