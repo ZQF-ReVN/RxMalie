@@ -5,6 +5,7 @@
 #include <fstream>
 #include <direct.h>
 
+
 bool PutConsole(const wchar_t* pString)
 {
 	static HANDLE hSTD_OUT = GetStdHandle(STD_OUTPUT_HANDLE);

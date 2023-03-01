@@ -1,6 +1,7 @@
 #include "MalieEncryption.h"
 #include "defs.h"
 
+
 static unsigned char aStaticTable[32] =
 {
 	0xA4,0xA7,0xA6,0xA1,0xA0,0xA3,0xA2,0xAC,
@@ -9,7 +10,7 @@ static unsigned char aStaticTable[32] =
 	0xB9,0xB8,0xBB,0xBA,0xA1,0xA9,0xB1,0xB9,
 };
 
-unsigned int DecBlock_DIRA(unsigned int nOffset, unsigned char* pEncBuffer , unsigned int* pKeyTable)
+unsigned int MalieEncryption(unsigned int nOffset, unsigned char* pEncBuffer , unsigned int* pKeyTable)
 {
 	//Round 1
 	unsigned char szBlock = nOffset & 0xF;

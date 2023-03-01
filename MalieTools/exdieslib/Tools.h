@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+
 bool PutConsole(const wchar_t* pString);
 
 void MakeDir(const char* pDirName);
