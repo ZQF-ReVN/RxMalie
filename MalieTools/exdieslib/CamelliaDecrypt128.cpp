@@ -1,11 +1,11 @@
-#include "camellia_decrypt128.h"
-#include "exdieslib_key.h"
+#include "CamelliaDecrypt128.h"
+#include "CamelliaDecrypt128_Key.h"
 
 #include <algorithm>
 using std::swap;
 
 // s-boxes for camellia transform
-unsigned long SBOX_TABLE1[] = {
+static uint32_t g_SBOX_TABLE1[] = {
   0x70707000, 0x82828200, 0x2C2C2C00, 0xECECEC00, 0xB3B3B300, 0x27272700, 0xC0C0C000, 0xE5E5E500,
   0xE4E4E400, 0x85858500, 0x57575700, 0x35353500, 0xEAEAEA00, 0x0C0C0C00, 0xAEAEAE00, 0x41414100,
   0x23232300, 0xEFEFEF00, 0x6B6B6B00, 0x93939300, 0x45454500, 0x19191900, 0xA5A5A500, 0x21212100,
@@ -40,7 +40,7 @@ unsigned long SBOX_TABLE1[] = {
   0x15151500, 0xE3E3E300, 0xADADAD00, 0xF4F4F400, 0x77777700, 0xC7C7C700, 0x80808000, 0x9E9E9E00,
 };
 
-unsigned long SBOX_TABLE2[] = {
+static uint32_t g_SBOX_TABLE2[] = {
   0x70700070, 0x2C2C002C, 0xB3B300B3, 0xC0C000C0, 0xE4E400E4, 0x57570057, 0xEAEA00EA, 0xAEAE00AE,
   0x23230023, 0x6B6B006B, 0x45450045, 0xA5A500A5, 0xEDED00ED, 0x4F4F004F, 0x1D1D001D, 0x92920092,
   0x86860086, 0xAFAF00AF, 0x7C7C007C, 0x1F1F001F, 0x3E3E003E, 0xDCDC00DC, 0x5E5E005E, 0x0B0B000B,
@@ -75,7 +75,7 @@ unsigned long SBOX_TABLE2[] = {
   0x28280028, 0x7B7B007B, 0xC9C900C9, 0xC1C100C1, 0xE3E300E3, 0xF4F400F4, 0xC7C700C7, 0x9E9E009E,
 };
 
-unsigned long SBOX_TABLE3[] = {
+static uint32_t g_SBOX_TABLE3[] = {
   0x00E0E0E0, 0x00050505, 0x00585858, 0x00D9D9D9, 0x00676767, 0x004E4E4E, 0x00818181, 0x00CBCBCB,
   0x00C9C9C9, 0x000B0B0B, 0x00AEAEAE, 0x006A6A6A, 0x00D5D5D5, 0x00181818, 0x005D5D5D, 0x00828282,
   0x00464646, 0x00DFDFDF, 0x00D6D6D6, 0x00272727, 0x008A8A8A, 0x00323232, 0x004B4B4B, 0x00424242,
@@ -110,7 +110,7 @@ unsigned long SBOX_TABLE3[] = {
   0x002A2A2A, 0x00C7C7C7, 0x005B5B5B, 0x00E9E9E9, 0x00EEEEEE, 0x008F8F8F, 0x00010101, 0x003D3D3D,
 };
 
-unsigned long SBOX_TABLE4[] = {
+static uint32_t g_SBOX_TABLE4[] = {
   0x38003838, 0x41004141, 0x16001616, 0x76007676, 0xD900D9D9, 0x93009393, 0x60006060, 0xF200F2F2,
   0x72007272, 0xC200C2C2, 0xAB00ABAB, 0x9A009A9A, 0x75007575, 0x06000606, 0x57005757, 0xA000A0A0,
   0x91009191, 0xF700F7F7, 0xB500B5B5, 0xC900C9C9, 0xA200A2A2, 0x8C008C8C, 0xD200D2D2, 0x90009090,
@@ -145,17 +145,17 @@ unsigned long SBOX_TABLE4[] = {
   0x8A008A8A, 0xF100F1F1, 0xD600D6D6, 0x7A007A7A, 0xBB00BBBB, 0xE300E3E3, 0x40004040, 0x4F004F4F,
 };
 
-unsigned long mutate_value(unsigned long x)
+static uint32_t MutateValue(uint32_t Value)
 {
-	return (_rotl(x, 8) & 0x00FF00FF) | (_rotr(x, 8) & 0xFF00FF00);
+	return (_rotl(Value, 8) & 0x00FF00FF) | (_rotr(Value, 8) & 0xFF00FF00);
 }
 
-void mutate_block(unsigned long* src, unsigned long* mutated)
+void MutateBlock(uint32_t* pSrc, uint32_t* pMutated)
 {
-	mutated[0] = mutate_value(src[0]);
-	mutated[1] = mutate_value(src[1]);
-	mutated[2] = mutate_value(src[2]);
-	mutated[3] = mutate_value(src[3]);
+	pMutated[0] = MutateValue(pSrc[0]);
+	pMutated[1] = MutateValue(pSrc[1]);
+	pMutated[2] = MutateValue(pSrc[2]);
+	pMutated[3] = MutateValue(pSrc[3]);
 }
 
 #define BYTE1(x) ((x      ) & 0xFF)
@@ -163,22 +163,22 @@ void mutate_block(unsigned long* src, unsigned long* mutated)
 #define BYTE3(x) ((x >> 16) & 0xFF)
 #define BYTE4(x) ((x >> 24) & 0xFF)
 
-void camellia_decrypt128(unsigned long key_index, unsigned char* buff, unsigned long offset)
+void CamelliaDecrypt128(size_t nKeyIndex, unsigned char* pBuffer, size_t posOffset)
 {
-	unsigned long  dst_block[4] = { 0 };
-	unsigned long* src_block = (unsigned long*)buff;
+	uint32_t  dst_block[4] = { 0 };
+	uint32_t* src_block = (uint32_t*)pBuffer;
 
-	const unsigned long* key = KEYS[key_index];
-	const unsigned long  iterations = 3;
+	const uint32_t* key = KEYS[nKeyIndex];
+	const uint32_t  iterations = 3;
 
-	unsigned long roll_bits = ((offset >> 4) & 0x0F) + 16;
+	uint32_t roll_bits = ((posOffset >> 4) & 0x0F) + 16;
 
 	dst_block[0] = _rotl(src_block[0], roll_bits);
 	dst_block[1] = _rotr(src_block[1], roll_bits);
 	dst_block[2] = _rotl(src_block[2], roll_bits);
 	dst_block[3] = _rotr(src_block[3], roll_bits);
 
-	mutate_block(dst_block, dst_block);
+	MutateBlock(dst_block, dst_block);
 
 	dst_block[0] ^= key[0];
 	dst_block[1] ^= key[1];
@@ -187,27 +187,29 @@ void camellia_decrypt128(unsigned long key_index, unsigned char* buff, unsigned 
 
 	key += 4;
 
-	for (unsigned long i = 0; i < iterations; i++) {
-		for (unsigned long j = 0; j < iterations; j++) {
+	for (size_t i = 0; i < iterations; i++)
+	{
+		for (uint32_t j = 0; j < iterations; j++)
+		{
 			// Feistel rounds
-			unsigned long temp = key[2] ^ dst_block[0];
-			unsigned long scramble1 = SBOX_TABLE2[BYTE1(temp)] ^ SBOX_TABLE4[BYTE2(temp)] ^
-				SBOX_TABLE3[BYTE3(temp)] ^ SBOX_TABLE1[BYTE4(temp)];
+			uint32_t temp = key[2] ^ dst_block[0];
+			uint32_t scramble1 = g_SBOX_TABLE2[BYTE1(temp)] ^ g_SBOX_TABLE4[BYTE2(temp)] ^
+				g_SBOX_TABLE3[BYTE3(temp)] ^ g_SBOX_TABLE1[BYTE4(temp)];
 
 			temp = key[3] ^ dst_block[1];
-			unsigned long scramble2 = SBOX_TABLE1[BYTE1(temp)] ^ SBOX_TABLE2[BYTE2(temp)] ^
-				SBOX_TABLE4[BYTE3(temp)] ^ SBOX_TABLE3[BYTE4(temp)];
+			uint32_t scramble2 = g_SBOX_TABLE1[BYTE1(temp)] ^ g_SBOX_TABLE2[BYTE2(temp)] ^
+				g_SBOX_TABLE4[BYTE3(temp)] ^ g_SBOX_TABLE3[BYTE4(temp)];
 
 			dst_block[2] ^= scramble1 ^ scramble2;
 			dst_block[3] ^= scramble1 ^ scramble2 ^ _rotr(scramble1, 8);
 
 			temp = key[0] ^ dst_block[2];
-			unsigned long scramble3 = SBOX_TABLE2[BYTE1(temp)] ^ SBOX_TABLE4[BYTE2(temp)] ^
-				SBOX_TABLE3[BYTE3(temp)] ^ SBOX_TABLE1[BYTE4(temp)];
+			uint32_t scramble3 = g_SBOX_TABLE2[BYTE1(temp)] ^ g_SBOX_TABLE4[BYTE2(temp)] ^
+				g_SBOX_TABLE3[BYTE3(temp)] ^ g_SBOX_TABLE1[BYTE4(temp)];
 
 			temp = key[1] ^ dst_block[3];
-			unsigned long scramble4 = SBOX_TABLE1[BYTE1(temp)] ^ SBOX_TABLE2[BYTE2(temp)] ^
-				SBOX_TABLE4[BYTE3(temp)] ^ SBOX_TABLE3[BYTE4(temp)];
+			uint32_t scramble4 = g_SBOX_TABLE1[BYTE1(temp)] ^ g_SBOX_TABLE2[BYTE2(temp)] ^
+				g_SBOX_TABLE4[BYTE3(temp)] ^ g_SBOX_TABLE3[BYTE4(temp)];
 
 			dst_block[0] ^= scramble3 ^ scramble4;
 			dst_block[1] ^= scramble3 ^ scramble4 ^ _rotr(scramble3, 8);
@@ -233,5 +235,5 @@ void camellia_decrypt128(unsigned long key_index, unsigned char* buff, unsigned 
 	dst_block[2] ^= key[2];
 	dst_block[3] ^= key[3];
 
-	mutate_block(dst_block, src_block);
+	MutateBlock(dst_block, src_block);
 }

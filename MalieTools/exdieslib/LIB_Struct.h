@@ -41,4 +41,3 @@ struct LIBPENTRY2 {
 	unsigned long offset; // in 4096 byte blocks (or 1024 byte blocks...)
 };
 
-unsigned long LIBPENTRY_FLAG_FILE = 0x10000;

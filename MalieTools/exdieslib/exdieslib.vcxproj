@@ -127,18 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="as-util.h" />
-    <ClInclude Include="camellia_decrypt128.h" />
+    <ClInclude Include="CamelliaDecrypt128.h" />
+    <ClInclude Include="LIB_Decoder.h" />
     <ClInclude Include="defs.h" />
-    <ClInclude Include="exdieslib_key.h" />
-    <ClInclude Include="exdieslib_struct.h" />
-    <ClInclude Include="DecBlock_DIRA.h" />
-    <ClInclude Include="KeyTable.h" />
+    <ClInclude Include="CamelliaDecrypt128_Key.h" />
+    <ClInclude Include="LIB_Struct.h" />
+    <ClInclude Include="MalieEncryption.h" />
+    <ClInclude Include="MalieEncryption_Key.h" />
+    <ClInclude Include="LIBP.h" />
+    <ClInclude Include="LIBU.h" />
+    <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="camellia_decrypt128.cpp" />
+    <ClCompile Include="CamelliaDecrypt128.cpp" />
+    <ClCompile Include="LIB_Decoder.cpp" />
     <ClCompile Include="exdieslib.cpp" />
-    <ClCompile Include="DecBlock_DIRA.cpp" />
+    <ClCompile Include="MalieEncryption.cpp" />
+    <ClCompile Include="LIBP.cpp" />
+    <ClCompile Include="LIBU.cpp" />
+    <ClCompile Include="Tools.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

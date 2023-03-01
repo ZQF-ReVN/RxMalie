@@ -1,4 +1,4 @@
-#include "DecBlock_DIRA.h"
+#include "MalieEncryption.h"
 #include "defs.h"
 
 static unsigned char aStaticTable[32] =
