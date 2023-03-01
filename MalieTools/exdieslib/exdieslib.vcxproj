@@ -74,7 +74,6 @@
   <ItemGroup>
     <ClInclude Include="CamelliaDecrypt128.h" />
     <ClInclude Include="LIB_Decoder.h" />
-    <ClInclude Include="defs.h" />
     <ClInclude Include="CamelliaDecrypt128_Key.h" />
     <ClInclude Include="LIB_Struct.h" />
     <ClInclude Include="MalieEncryption.h" />

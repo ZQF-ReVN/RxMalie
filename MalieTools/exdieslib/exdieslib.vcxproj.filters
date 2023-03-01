@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="IDA Macro">
-      <UniqueIdentifier>{39de0d2d-00ac-4250-8050-36e3a5182934}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MalieEncryption">
       <UniqueIdentifier>{facc42c2-fd00-4e6c-b364-9b03967ad87c}</UniqueIdentifier>
     </Filter>
@@ -20,9 +17,6 @@
   <ItemGroup>
     <ClInclude Include="MalieEncryption.h">
       <Filter>MalieEncryption</Filter>
-    </ClInclude>
-    <ClInclude Include="defs.h">
-      <Filter>IDA Macro</Filter>
     </ClInclude>
     <ClInclude Include="CamelliaDecrypt128.h">
       <Filter>CamelliaDecrypt128</Filter>

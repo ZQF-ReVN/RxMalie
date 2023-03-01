@@ -1,8 +1,11 @@
 #include "MalieEncryption.h"
-#include "defs.h"
+#include <stdlib.h>
+#include <stdint.h>
 
+inline uint32_t __ROR4__(uint32_t value, int count) { return _rotl(value, -count); }
+inline uint32_t __ROL4__(uint32_t value, int count) { return _rotl(value, count); }
 
-static unsigned char aStaticTable[32] =
+static uint8_t aStaticTable[32] =
 {
 	0xA4,0xA7,0xA6,0xA1,0xA0,0xA3,0xA2,0xAC,
 	0xAF,0xAE,0xA9,0xA8,0xAB,0xAA,0xB4,0xB7,
@@ -10,21 +13,21 @@ static unsigned char aStaticTable[32] =
 	0xB9,0xB8,0xBB,0xBA,0xA1,0xA9,0xB1,0xB9,
 };
 
-unsigned int MalieEncryption(unsigned int nOffset, unsigned char* pEncBuffer , unsigned int* pKeyTable)
+uint32_t MalieEncryption(uint32_t nOffset, uint8_t* pEncBuffer , uint32_t* pKeyTable)
 {
 	//Round 1
-	unsigned char szBlock = nOffset & 0xF;
-	unsigned char xorKey = pEncBuffer[szBlock];
-	for (unsigned char iteBlock = 0; iteBlock < 0x10; iteBlock++)
+	uint8_t szBlock = nOffset & 0xF;
+	uint8_t xorKey = pEncBuffer[szBlock];
+	for (uint8_t iteBlock = 0; iteBlock < 0x10; iteBlock++)
 	{
-		unsigned char read = pEncBuffer[iteBlock];
+		uint8_t read = pEncBuffer[iteBlock];
 		if (szBlock != iteBlock) read ^= xorKey;
 		pEncBuffer[iteBlock] = read;
 	}
 
 	//Round 2
-	unsigned int* pDecBuffer = (unsigned int*)pEncBuffer;
-	unsigned char shrOffset = nOffset >> 4;
+	uint32_t* pDecBuffer = (uint32_t*)pEncBuffer;
+	uint8_t shrOffset = nOffset >> 4;
 	pDecBuffer[0] = __ROR4__
 	(
 		pDecBuffer[0] ^ __ROR4__(pKeyTable[0], aStaticTable[(shrOffset + 3 * 0) & 0x1F] ^ 0xA5),
