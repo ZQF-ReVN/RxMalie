@@ -2,6 +2,7 @@
 Modify exdieslib to support the new encryption
 
 # Add
+Triangle Love -アプリコットフィズ- PKG \ DL  
 恋音セ・ピアーチェ PKG  
 不運と幸運と恋占いのタロット PKG  
 その花が咲いたら、また僕は君に出逢う PKG  
