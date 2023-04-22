@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Decoder">
+      <UniqueIdentifier>{350c2c06-8e6c-4e34-aa40-8771e51e537c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MalieEncryption">
+      <UniqueIdentifier>{a54cbc17-2bc5-4b1d-9a22-c8aae76a2dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LIBP">
+      <UniqueIdentifier>{4716c9ed-0bf9-4870-b7b9-33e3dd209d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CamelliaDecryption">
+      <UniqueIdentifier>{8c7b4253-8841-468e-8dc6-cc31b0742d87}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Decoder.cpp">
+      <Filter>Decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="MalieEncryption.cpp">
+      <Filter>MalieEncryption</Filter>
+    </ClCompile>
+    <ClCompile Include="CamelliaDecryption128.cpp">
+      <Filter>CamelliaDecryption</Filter>
+    </ClCompile>
+    <ClCompile Include="LIBP_Editor.cpp">
+      <Filter>LIBP</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Decoder.h">
+      <Filter>Decoder</Filter>
+    </ClInclude>
+    <ClInclude Include="MalieEncryption.h">
+      <Filter>MalieEncryption</Filter>
+    </ClInclude>
+    <ClInclude Include="MalieEncryption_Key.h">
+      <Filter>MalieEncryption</Filter>
+    </ClInclude>
+    <ClInclude Include="LIBP_Struct.h">
+      <Filter>LIBP</Filter>
+    </ClInclude>
+    <ClInclude Include="CamelliaDecryption128.h">
+      <Filter>CamelliaDecryption</Filter>
+    </ClInclude>
+    <ClInclude Include="CamelliaDecryption128_Key.h">
+      <Filter>CamelliaDecryption</Filter>
+    </ClInclude>
+    <ClInclude Include="LIBP_Editor.h">
+      <Filter>LIBP</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
