@@ -2,12 +2,16 @@
 Modify exdieslib to support the new encryption
 
 # Add
+シルヴァリオ ラグナロク  
+シルヴァリオ ヴェンデッタ - Verse of Orpheus -  
+シルヴァリオ トリニティ -Beyond the Horizon-  
 Triangle Love -アプリコットフィズ- PKG \ DL  
 恋音セ・ピアーチェ PKG  
 不運と幸運と恋占いのタロット PKG  
 その花が咲いたら、また僕は君に出逢う PKG  
 忘却執事と恋するお嬢様の回想録 PKG  
 初恋＊シンドローム DL  
+二人と始める打算的なラブコメ PKG  
 
 # Find Key Table
 if you can read chinese here are some essays I wrote to show you how to find the key  
