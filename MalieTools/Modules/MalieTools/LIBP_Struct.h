@@ -4,9 +4,9 @@
 
 namespace MalieTools
 {
-	namespace LIBP
+	namespace Pack
 	{
-		struct Header
+		struct LIBP_Header
 		{
 			uint8_t  aSignature[0x4];     // "LIBP5"
 			uint32_t uiEleEntryCount;
@@ -14,7 +14,7 @@ namespace MalieTools
 			uint32_t uiUn0;
 		};
 
-		struct EleEntry
+		struct LIBP_EleEntry
 		{
 			union
 			{
@@ -32,7 +32,7 @@ namespace MalieTools
 			};
 		};
 
-		struct ResEntry
+		struct LIBP_ResEntry
 		{
 			uint32_t uiResOffset;         // uiResOffset * alignment:0x400
 		};

@@ -1,10 +1,10 @@
 #pragma once
-#include "MalieEncryption_Key.h"
+#include "MalieDecryption_Key.h"
 
 
 namespace MalieTools
 {
-	namespace MalieEncryption
+	namespace MalieDecryption
 	{
 		uint32_t DecryptBlock(const uint32_t nOffset, const uint32_t* pKeyTable, uint8_t* pBlock);
 	}

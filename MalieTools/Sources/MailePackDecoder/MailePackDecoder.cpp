@@ -2,14 +2,14 @@
 #include <fstream>
 
 #include "../../Modules/MalieTools/Decoder.h"
-#include "../../Modules/MalieTools/LIBP_Editor.h"
+#include "../../Modules/MalieTools/LIBP.h"
 
 int main()
 {
-	//MalieTools::Decoder::Pack_Decodeer decoder(1, MalieTools::MalieEncryption::Key::Silverio_Ragnarok);
-	//decoder.DecodePack(L"data3.dat", 0x10000);
+	//MalieTools::Pack::Decoder decoder(1, MalieTools::MalieDecryption::Key::Silverio_Vendetta_Verse_of_Orpheus);
+	//decoder.DecodePack(L"data2.dat", 0x10000);
 
-	MalieTools::LIBP::Editor editor(L"data3.dat");
+	MalieTools::Pack::LIBP editor(L"data3.dat");
 	editor.LoadPackIndex();
 }
 

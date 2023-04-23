@@ -2,16 +2,16 @@
 #include <fstream>
 #include <string>
 
-#include "MalieEncryption.h"
+#include "MalieDecryption.h"
 #include "CamelliaDecryption128.h"
 #include "../../ThirdParty/TDA/AutoBuffer.h"
 
 
 namespace MalieTools
 {
-	namespace Decoder
+	namespace Pack
 	{
-		class Pack_Decodeer
+		class Decoder
 		{
 		private:
 			const uint32_t  m_nType;
@@ -20,7 +20,7 @@ namespace MalieTools
 			TDA::AutoBuffer m_Buffer;
 
 		public:
-			Pack_Decodeer(const uint32_t nType, const uint32_t* pKeyTable) :m_nType(nType), m_pKeyTable(pKeyTable) {}
+			Decoder(const uint32_t nType, const uint32_t* pKeyTable) :m_nType(nType), m_pKeyTable(pKeyTable) {}
 
 			bool DecodePack(std::wstring wsPack, uint32_t nSizeBuffer);
 

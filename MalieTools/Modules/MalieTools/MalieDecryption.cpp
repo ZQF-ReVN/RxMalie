@@ -1,10 +1,10 @@
-#include "MalieEncryption.h"
+#include "MalieDecryption.h"
 #include <stdlib.h>
 
 
 namespace MalieTools
 {
-	namespace MalieEncryption
+	namespace MalieDecryption
 	{
 		inline uint32_t __ROR4__(uint32_t value, int32_t count) { return _rotl(value, -count); }
 		inline uint32_t __ROL4__(uint32_t value, int32_t count) { return _rotl(value, count); }

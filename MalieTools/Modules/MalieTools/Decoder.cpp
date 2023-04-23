@@ -5,12 +5,12 @@
 
 namespace MalieTools
 {
-	namespace Decoder
+	namespace Pack
 	{
-		const static size_t ALIGN_SIZE = 0x400;
-		const static size_t BLOCK_SIZE = 0x10;
+		static const size_t ALIGN_SIZE = 0x400;
+		static const size_t BLOCK_SIZE = 0x10;
 
-		bool Pack_Decodeer::InitPack(const std::wstring& wsPack, std::ifstream& ref_IStream, std::ofstream& ref_OStream)
+		bool Decoder::InitPack(const std::wstring& wsPack, std::ifstream& ref_IStream, std::ofstream& ref_OStream)
 		{
 			ref_IStream.open(wsPack, std::ios::binary);
 			if (!ref_IStream.is_open()) { return false; }
@@ -21,7 +21,7 @@ namespace MalieTools
 			return true;
 		}
 
-		bool Pack_Decodeer::DecodePack(std::wstring wsPack, uint32_t nSizeBuffer)
+		bool Decoder::DecodePack(std::wstring wsPack, uint32_t nSizeBuffer)
 		{
 			uint8_t* pBuffer = m_Buffer.ReSize(nSizeBuffer);
 
@@ -51,16 +51,16 @@ namespace MalieTools
 			return true;
 		}
 
-		void Pack_Decodeer::DecodeBlock(uint32_t nOffset, uint8_t* pBlock)
+		void Decoder::DecodeBlock(uint32_t nOffset, uint8_t* pBlock)
 		{
 			switch (m_nType)
 			{
 			case 0: { CamelliaDecryption::DecryptBlock(nOffset, m_pKeyTable, pBlock); }  break;
-			case 1: { MalieEncryption::DecryptBlock(nOffset, m_pKeyTable, pBlock); }    break;
+			case 1: { MalieDecryption::DecryptBlock(nOffset, m_pKeyTable, pBlock); }    break;
 			}
 		}
 
-		bool Pack_Decodeer::DecodeBuffer(uint32_t& nOffset, uint8_t* pBuffer, uint32_t nBufferSize)
+		bool Decoder::DecodeBuffer(uint32_t& nOffset, uint8_t* pBuffer, uint32_t nBufferSize)
 		{
 			if (nBufferSize % BLOCK_SIZE) { return false; }
 
@@ -73,7 +73,7 @@ namespace MalieTools
 			return true;
 		}
 
-		bool Pack_Decodeer::OpenPack(const std::wstring& wsPack)
+		bool Decoder::OpenPack(const std::wstring& wsPack)
 		{
 			m_ifsPack.open(wsPack, std::ios::binary);
 			if (!m_ifsPack.is_open()) { return false; }
@@ -81,7 +81,7 @@ namespace MalieTools
 			return true;
 		}
 
-		uint8_t* Pack_Decodeer::DecodeBuffer(uint32_t nOffset, uint32_t nSize)
+		uint8_t* Decoder::DecodeBuffer(uint32_t nOffset, uint32_t nSize)
 		{
 			uint32_t remain_size = nSize % ALIGN_SIZE;
 			uint32_t align_size = nSize - remain_size + ALIGN_SIZE;

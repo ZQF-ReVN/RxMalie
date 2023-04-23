@@ -129,17 +129,17 @@
   <ItemGroup>
     <ClCompile Include="CamelliaDecryption128.cpp" />
     <ClCompile Include="Decoder.cpp" />
-    <ClCompile Include="LIBP_Editor.cpp" />
-    <ClCompile Include="MalieEncryption.cpp" />
+    <ClCompile Include="LIBP.cpp" />
+    <ClCompile Include="MalieDecryption.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CamelliaDecryption128.h" />
     <ClInclude Include="CamelliaDecryption128_Key.h" />
     <ClInclude Include="Decoder.h" />
-    <ClInclude Include="LIBP_Editor.h" />
+    <ClInclude Include="LIBP.h" />
     <ClInclude Include="LIBP_Struct.h" />
-    <ClInclude Include="MalieEncryption.h" />
-    <ClInclude Include="MalieEncryption_Key.h" />
+    <ClInclude Include="MalieDecryption.h" />
+    <ClInclude Include="MalieDecryption_Key.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ThirdParty\TDA\TDA.vcxproj">
